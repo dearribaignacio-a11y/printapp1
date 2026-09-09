@@ -1,0 +1,20 @@
+# Dependencias: se reinstalan con npm install
+node_modules/
+
+# La clave de la API nunca va al repositorio
+.env
+.env.*
+!.env.example
+
+# Copias generadas del panel (se rehacen cuando hagan falta)
+dist-hostinger/
+panel-print-hostinger.zip
+panel-print-preview.html
+
+# Basura del sistema y del editor
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

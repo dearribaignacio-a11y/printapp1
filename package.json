@@ -1,0 +1,12 @@
+{
+  "name": "print-panel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Panel de gestion de ventas para comercios chicos",
+  "scripts": {
+    "start": "node serve.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.124.0"
+  }
+}
