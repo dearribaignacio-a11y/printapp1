@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rindo · prueba de seguridad</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<main>
+
+  <h1>Rindo · prueba de seguridad</h1>
+  <p class="sub">
+    Comprueba que la base no entrega datos sin una sesión válida, que sólo
+    devuelve la fila propia, y que nadie puede activarse el plan por su cuenta.
+    Usá una cuenta de prueba real, ya registrada.
+  </p>
+
+  <section class="caja" id="pantalla-config" hidden>
+    <h2>Falta configurar</h2>
+    <div class="aviso error" id="config-error"></div>
+  </section>
+
+  <section class="caja" id="pantalla-form">
+    <h2>Cuenta de prueba</h2>
+    <form id="form-probar">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" required>
+      <label for="pass">Contraseña (la correcta)</label>
+      <input id="pass" type="password" autocomplete="current-password" required>
+      <button type="submit" id="btn-probar">Correr las pruebas</button>
+    </form>
+    <div class="aviso info" style="margin-top:14px">
+      Se va a intentar entrar una vez con una contraseña equivocada a propósito.
+      Es parte de la prueba.
+    </div>
+  </section>
+
+  <section class="caja" id="pantalla-resultado" hidden>
+    <h2>Resultado</h2>
+    <div id="resumen"></div>
+    <pre id="detalle"></pre>
+    <button id="btn-otra" class="secundario">Correr de nuevo</button>
+  </section>
+
+  <p class="pie">Rindo · entorno de prueba</p>
+
+</main>
+
+<script src="config.js"></script>
+<script type="module" src="seguridad.js"></script>
+</body>
+</html>

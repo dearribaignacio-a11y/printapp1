@@ -104,14 +104,18 @@ alter table public.usuarios      enable row level security;
 alter table public.suscripciones enable row level security;
 alter table public.planes        enable row level security;
 
+-- "to authenticated" deja afuera al rol anónimo antes de mirar la fila:
+-- sin haber pasado por la contraseña no se evalúa ni la condición.
 drop policy if exists "cada uno ve su perfil"        on public.usuarios;
 create policy "cada uno ve su perfil"
   on public.usuarios for select
+  to authenticated
   using (auth.uid() = id);
 
 drop policy if exists "cada uno ve sus suscripciones" on public.suscripciones;
 create policy "cada uno ve sus suscripciones"
   on public.suscripciones for select
+  to authenticated
   using (auth.uid() = usuario_id);
 
 drop policy if exists "los planes son públicos"       on public.planes;

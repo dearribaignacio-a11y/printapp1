@@ -20,6 +20,7 @@ auth.js                                 registrar, entrar, salir, sesión y perf
 test/
   index.html  estilo.css  app.js        interfaz de prueba (aparte del panel)
   config.js                             acá van la URL y la anon key
+  seguridad.html  seguridad.js          comprueba que RLS esté bien puesto
 ```
 
 `auth.js` va en la raíz a propósito: lo comparten la página de prueba y el
@@ -141,6 +142,25 @@ Abajo de todo hay un recuadro negro con lo que dice la base en crudo: sirve
 para ver exactamente qué está pasando.
 
 Los botones "Elegir" todavía no van a andar — falta Mercado Pago.
+
+### 2.4 Comprobar que RLS está bien puesto
+
+Abrí <http://localhost:5173/test/seguridad.html>, poné el email y la contraseña
+de la cuenta que acabás de crear, y dale a **Correr las pruebas**. Comprueba
+siete cosas contra la base de verdad:
+
+| Comprobación | Qué demuestra |
+|---|---|
+| Sin sesión, `usuarios` devuelve 0 filas | la anon key sola no sirve para nada |
+| Sin sesión, `suscripciones` devuelve 0 filas | ídem |
+| Sin sesión, los planes sí se ven | el catálogo de precios es público a propósito |
+| Con la contraseña equivocada no inicia sesión | la verificación funciona |
+| Después del intento fallido sigue sin entregar datos | un login fallido no deja ninguna puerta abierta |
+| Con sesión, devuelve exactamente 1 fila, y es la propia | nadie ve datos ajenos |
+| **No puede ponerse `estado_pago = activo` solo** | no se puede usar la app sin pagar |
+
+Si alguna dice **FALLA**, el problema está en las políticas de Supabase, no en
+el código: volvé a correr la parte de RLS de `0001_init.sql`.
 
 ---
 
