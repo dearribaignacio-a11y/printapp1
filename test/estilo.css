@@ -1,0 +1,79 @@
+/* Interfaz de prueba. Fea a propósito: sirve para verificar el flujo,
+   no para mostrarle a nadie. La interfaz real de Rindo no se toca. */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 24px 16px 64px;
+  font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #1a1a1a;
+  background: #f4f4f5;
+}
+
+main { max-width: 620px; margin: 0 auto; }
+
+h1 { font-size: 20px; margin: 0 0 4px; }
+h2 { font-size: 17px; margin: 0 0 12px; }
+.sub { margin: 0 0 24px; color: #666; font-size: 13px; }
+
+.caja {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+label { display: block; margin: 12px 0 4px; font-size: 13px; font-weight: 600; }
+
+input {
+  width: 100%;
+  padding: 9px 10px;
+  font: inherit;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: inherit;
+}
+
+button {
+  margin-top: 14px;
+  padding: 9px 16px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: #2563eb;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button:disabled { opacity: .5; cursor: default; }
+button.secundario { background: #6b7280; }
+
+.tabs { display: flex; gap: 8px; margin-bottom: 4px; }
+.tabs button { margin: 0; background: #e5e7eb; color: #374151; }
+.tabs button[aria-selected="true"] { background: #2563eb; color: #fff; }
+
+.plan { border: 1px solid #ddd; border-radius: 8px; padding: 14px; margin-bottom: 10px; }
+.plan h3 { margin: 0 0 4px; font-size: 16px; }
+.plan p { margin: 0; font-size: 13px; color: #555; }
+.precio { font-size: 18px; font-weight: 700; margin: 8px 0 0; }
+
+.aviso { padding: 10px 12px; border-radius: 6px; font-size: 13px; margin-top: 12px; }
+.aviso.error { background: #fee2e2; color: #991b1b; }
+.aviso.ok    { background: #dcfce7; color: #166534; }
+.aviso.info  { background: #e0f2fe; color: #075985; }
+
+.grande { font-size: 22px; font-weight: 700; margin: 8px 0; }
+
+pre {
+  background: #111827;
+  color: #d1d5db;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  overflow-x: auto;
+}
+
+.pie { font-size: 12px; color: #777; text-align: center; margin-top: 24px; }
+[hidden] { display: none !important; }

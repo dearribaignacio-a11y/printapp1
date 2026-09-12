@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rindo · prueba de backend</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<main>
+
+  <h1>Rindo · prueba de backend</h1>
+  <p class="sub">
+    Página de prueba. Sirve para verificar registro, login, elección de plan y
+    cobro por Mercado Pago en <strong>modo sandbox</strong>. No es la interfaz de Rindo.
+  </p>
+
+  <!-- Falta configurar -->
+  <section class="caja" id="pantalla-config" hidden>
+    <h2>Falta configurar</h2>
+    <div class="aviso error" id="config-error"></div>
+    <p class="sub" style="margin-top:12px">Editá <code>test/config.js</code> con la URL y la anon key del proyecto.</p>
+  </section>
+
+  <!-- Registro / login -->
+  <section class="caja" id="pantalla-auth" hidden>
+    <div class="tabs">
+      <button id="tab-login"    aria-selected="true">Iniciar sesión</button>
+      <button id="tab-registro" aria-selected="false">Crear cuenta</button>
+    </div>
+
+    <form id="form-login">
+      <h2 style="margin-top:16px">Iniciar sesión</h2>
+      <label for="login-email">Email</label>
+      <input id="login-email" type="email" autocomplete="email" required>
+      <label for="login-pass">Contraseña</label>
+      <input id="login-pass" type="password" autocomplete="current-password" required>
+      <button type="submit">Entrar</button>
+    </form>
+
+    <form id="form-registro" hidden>
+      <h2 style="margin-top:16px">Crear cuenta</h2>
+      <label for="reg-nombre">Nombre</label>
+      <input id="reg-nombre" type="text" autocomplete="name" required>
+      <label for="reg-email">Email</label>
+      <input id="reg-email" type="email" autocomplete="email" required>
+      <label for="reg-pass">Contraseña</label>
+      <input id="reg-pass" type="password" autocomplete="new-password" minlength="6" required>
+      <button type="submit">Registrarme</button>
+    </form>
+
+    <div class="aviso" id="auth-aviso" hidden></div>
+  </section>
+
+  <!-- Elegir plan -->
+  <section class="caja" id="pantalla-planes" hidden>
+    <h2>Elegí tu plan</h2>
+    <div id="lista-planes"></div>
+    <div class="aviso" id="planes-aviso" hidden></div>
+  </section>
+
+  <!-- Esperando confirmación del pago -->
+  <section class="caja" id="pantalla-esperando" hidden>
+    <h2>Esperando la confirmación de Mercado Pago</h2>
+    <p class="sub" id="esperando-detalle">—</p>
+    <div class="aviso info">
+      Cuando Mercado Pago avise que la suscripción quedó autorizada, el webhook
+      pone el estado en <strong>activo</strong> y esta pantalla cambia sola.
+    </div>
+    <button id="btn-refrescar" class="secundario">Revisar ahora</button>
+    <button id="btn-otro-plan" class="secundario">Elegir otro plan</button>
+  </section>
+
+  <!-- Plan activo -->
+  <section class="caja" id="pantalla-activo" hidden>
+    <div class="aviso ok">El webhook funcionó: el pago quedó confirmado.</div>
+    <p class="grande" id="plan-activo">Plan activo: —</p>
+    <p class="sub" id="activo-detalle">—</p>
+  </section>
+
+  <!-- Estado crudo, para depurar -->
+  <section class="caja" id="pantalla-debug" hidden>
+    <h2>Estado en la base</h2>
+    <pre id="debug"></pre>
+    <button id="btn-salir" class="secundario">Cerrar sesión</button>
+  </section>
+
+  <p class="pie">Rindo · entorno de prueba</p>
+
+</main>
+
+<script src="config.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

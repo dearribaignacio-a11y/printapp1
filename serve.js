@@ -124,7 +124,7 @@ http.createServer(async (req, res) => {
   }
 
   let f = decodeURIComponent(req.url.split('?')[0]);
-  if (f === '/') f = '/index.html';
+  if (f.endsWith('/')) f += 'index.html';   /* '/' y '/test/' */
 
   const full = path.resolve(ROOT, '.' + f);
   if (!full.startsWith(ROOT)) { res.writeHead(403); return res.end('Prohibido'); }

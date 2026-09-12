@@ -86,6 +86,24 @@ No hay cálculo de impuestos.
 floja y el pico a media tarde. Reemplazá esas dos listas por las reales y todo
 el panel se recalcula solo.
 
+## Cuentas, planes y cobro
+
+El panel en sí no necesita servidor. Las cuentas, los planes y el cobro
+mensual sí, y viven aparte en Supabase:
+
+```
+supabase/migrations/     las tablas: usuarios, suscripciones, planes
+supabase/functions/      crear la suscripción en Mercado Pago y recibir el aviso
+test/                    interfaz de prueba del flujo completo, aparte del panel
+```
+
+El paso a paso —crear el proyecto de Supabase, las claves, los secrets y las
+pruebas con Mercado Pago en sandbox— está en
+[`docs/BACKEND.md`](docs/BACKEND.md).
+
+El Access Token de Mercado Pago vive como secret de Supabase. Nunca está en
+estos archivos ni llega al navegador.
+
 ## Publicarlo
 
 Los seis archivos del frente (`index.html`, `styles.css`, `data.js`,
