@@ -1,0 +1,11 @@
+# Configuración de las Edge Functions.
+# Lo importante: el webhook NO puede pedir JWT, porque quien lo llama es
+# Mercado Pago y no tiene una sesión de Supabase. Se protege con la firma.
+
+project_id = "rindo"
+
+[functions.crear-suscripcion]
+verify_jwt = true
+
+[functions.webhook-mercadopago]
+verify_jwt = false
