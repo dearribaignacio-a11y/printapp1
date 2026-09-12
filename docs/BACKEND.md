@@ -16,10 +16,14 @@ supabase/
     _shared/mercadopago.ts              CORS, firma y llamadas a Mercado Pago
     crear-suscripcion/index.ts          devuelve el link de checkout
     webhook-mercadopago/index.ts        confirma el pago y activa al usuario
+auth.js                                 registrar, entrar, salir, sesión y perfil
 test/
   index.html  estilo.css  app.js        interfaz de prueba (aparte del panel)
   config.js                             acá van la URL y la anon key
 ```
+
+`auth.js` va en la raíz a propósito: lo comparten la página de prueba y el
+panel definitivo, así el login no queda escrito dos veces.
 
 El panel real (`index.html`, `app.js`, `calc.js`, `data.js`, `chat.js`,
 `styles.css`) **no se toca**. La carpeta `test/` es independiente.
@@ -284,22 +288,31 @@ Cuando quieras llevar esto al panel de Rindo, es el mismo código: la carpeta
    <script src="config.js"></script>
    ```
 
-2. Un módulo con el cliente:
+2. Un módulo propio para el panel, que importe `auth.js` (el mismo que usa la
+   página de prueba). Tiene que ser `type="module"`:
 
-   ```js
-   import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm";
-   export const supabase = createClient(
-     window.RINDO_CONFIG.SUPABASE_URL,
-     window.RINDO_CONFIG.SUPABASE_ANON_KEY,
-   );
+   ```html
+   <script type="module" src="panel-cuentas.js"></script>
    ```
 
-3. Antes de renderizar el panel, `supabase.auth.getSession()`: si no hay
-   sesión, mostrás el login; si hay, leés `usuarios` y, si `estado_pago` no es
-   `activo`, mandás a elegir plan.
+   ```js
+   import { entrar, registrar, salir, sesionActual, perfil } from "./auth.js";
+   ```
 
-Lo único que cambia es el diseño de las pantallas. Las llamadas — `signUp`,
-`signInWithPassword`, `functions.invoke("crear-suscripcion")` — son idénticas.
+3. Antes de renderizar el panel, preguntá el estado:
+
+   ```js
+   if (!await sesionActual()) {
+     mostrarLogin();                       // no entró todavía
+   } else {
+     const p = await perfil();
+     if (p.estado_pago !== "activo") mostrarPlanes();
+     else                            arrancarPanel();
+   }
+   ```
+
+Lo único que cambia es el diseño de las pantallas: las funciones son las
+mismas que usa `test/app.js`.
 
 ---
 

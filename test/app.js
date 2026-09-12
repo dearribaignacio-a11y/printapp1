@@ -1,12 +1,14 @@
 // Prueba del backend de Rindo: registro, login, elección de plan y
 // suscripción por Mercado Pago (sandbox).
 //
-// Todo lo sensible vive en Supabase. Acá sólo hay la anon key, que es pública
-// y no sirve para nada sin una sesión válida gracias a Row Level Security.
+// El login y el registro salen de ../auth.js, el mismo módulo que va a usar
+// el panel real. Acá sólo está el armado de las pantallas de prueba.
 
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm";
+import {
+  supabase, problemaDeConfig, traducirError,
+  registrar, entrar, salir, sesionActual,
+} from "../auth.js";
 
-const CFG = window.RINDO_CONFIG ?? {};
 const $ = (id) => document.getElementById(id);
 
 const pantallas = ["config", "auth", "planes", "esperando", "activo", "debug"];
@@ -21,37 +23,11 @@ function aviso(el, texto, tipo = "error") {
 }
 
 // --- Configuración ----------------------------------------------------------
-if (!CFG.SUPABASE_URL || CFG.SUPABASE_URL.includes("TU-PROYECTO") ||
-    !CFG.SUPABASE_ANON_KEY || CFG.SUPABASE_ANON_KEY.includes("TU-ANON-KEY")) {
-  $("config-error").textContent = "Todavía no cargaste SUPABASE_URL y SUPABASE_ANON_KEY.";
+const problema = problemaDeConfig();
+if (problema) {
+  $("config-error").textContent = problema;
   mostrar("config");
-  throw new Error("Falta configurar test/config.js");
-}
-
-// persistSession: true (por defecto) guarda la sesión en localStorage,
-// así no hay que loguearse cada vez que se abre la página.
-const supabase = createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY, {
-  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
-});
-
-// --- Errores de Supabase en castellano --------------------------------------
-function traducirError(e) {
-  const m = String(e?.message ?? e ?? "").toLowerCase();
-  if (m.includes("user already registered") || m.includes("already been registered"))
-    return "Ese email ya tiene una cuenta. Probá iniciar sesión.";
-  if (m.includes("invalid login credentials"))
-    return "Email o contraseña incorrectos.";
-  if (m.includes("email not confirmed"))
-    return "Falta confirmar el email. Mirá tu casilla, o desactivá la confirmación en Supabase mientras probás.";
-  if (m.includes("password should be at least"))
-    return "La contraseña tiene que tener al menos 6 caracteres.";
-  if (m.includes("unable to validate email") || m.includes("invalid email"))
-    return "Ese email no parece válido.";
-  if (m.includes("for security purposes") || m.includes("rate limit"))
-    return "Demasiados intentos seguidos. Esperá unos segundos.";
-  if (m.includes("failed to fetch"))
-    return "No se pudo conectar con Supabase. Revisá la URL del proyecto y la conexión.";
-  return e?.message ?? "Ocurrió un error inesperado.";
+  throw new Error(problema);
 }
 
 // --- Pestañas registro / login ----------------------------------------------
@@ -73,28 +49,16 @@ $("form-registro").onsubmit = async (ev) => {
   boton.disabled = true;
   aviso($("auth-aviso"), "");
 
-  const { data, error } = await supabase.auth.signUp({
-    email: $("reg-email").value.trim(),
+  const r = await registrar({
+    nombre: $("reg-nombre").value,
+    email: $("reg-email").value,
     password: $("reg-pass").value,
-    // El nombre viaja en el metadata; el trigger de la base lo copia a usuarios.nombre.
-    options: { data: { nombre: $("reg-nombre").value.trim() } },
   });
 
   boton.disabled = false;
 
-  if (error) return aviso($("auth-aviso"), traducirError(error));
-
-  // Supabase devuelve un "usuario fantasma" sin identidades cuando el email ya existe
-  // y la confirmación por mail está activada: no filtra si la cuenta existe, pero
-  // para probar conviene decirlo.
-  if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
-    return aviso($("auth-aviso"), "Ese email ya tiene una cuenta. Probá iniciar sesión.");
-  }
-
-  if (!data.session) {
-    return aviso($("auth-aviso"),
-      "Cuenta creada. Confirmá el email desde tu casilla y después iniciá sesión.", "ok");
-  }
+  if (!r.ok) return aviso($("auth-aviso"), r.error);
+  if (!r.sesion) return aviso($("auth-aviso"), r.mensaje, "ok");
   await refrescar();
 };
 
@@ -105,19 +69,20 @@ $("form-login").onsubmit = async (ev) => {
   boton.disabled = true;
   aviso($("auth-aviso"), "");
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email: $("login-email").value.trim(),
+  const r = await entrar({
+    email: $("login-email").value,
     password: $("login-pass").value,
   });
 
   boton.disabled = false;
-  if (error) return aviso($("auth-aviso"), traducirError(error));
+
+  if (!r.ok) return aviso($("auth-aviso"), r.error);
   await refrescar();
 };
 
 $("btn-salir").onclick = async () => {
   detenerSondeo();
-  await supabase.auth.signOut();
+  await salir();
   location.href = location.pathname; // limpia los parámetros que deja Mercado Pago
 };
 
@@ -195,22 +160,22 @@ function detenerSondeo() { if (sondeo) { clearInterval(sondeo); sondeo = null; }
 const NOMBRES = { hogar: "Plan Hogar", comercial: "Plan Comercial", comercial_pro: "Plan Comercial Pro" };
 
 async function refrescar() {
-  const { data: { session } } = await supabase.auth.getSession();
+  const sesion = await sesionActual();
 
-  if (!session) {
+  if (!sesion) {
     detenerSondeo();
     mostrar("auth");
     return;
   }
 
   const { data: perfil, error } = await supabase
-    .from("usuarios").select("*").eq("id", session.user.id).maybeSingle();
+    .from("usuarios").select("*").eq("id", sesion.user.id).maybeSingle();
 
   const { data: subs } = await supabase
     .from("suscripciones").select("*").order("creada_en", { ascending: false }).limit(3);
 
   $("debug").textContent = JSON.stringify(
-    { sesion: session.user.email, usuarios: perfil ?? error?.message, suscripciones: subs ?? [] }, null, 2);
+    { sesion: sesion.user.email, usuarios: perfil ?? error?.message, suscripciones: subs ?? [] }, null, 2);
 
   if (!perfil) {
     mostrar("planes", "debug");
@@ -246,6 +211,6 @@ async function refrescar() {
   await pintarPlanes();
 }
 
-// La sesión persiste en localStorage: al volver del checkout ya está logueado.
+// La sesión persiste en el navegador: al volver del checkout ya está logueado.
 supabase.auth.onAuthStateChange(() => refrescar());
 refrescar();

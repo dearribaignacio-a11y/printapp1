@@ -92,6 +92,7 @@ El panel en sí no necesita servidor. Las cuentas, los planes y el cobro
 mensual sí, y viven aparte en Supabase:
 
 ```
+auth.js                  registrar, entrar, salir y saber quién está
 supabase/migrations/     las tablas: usuarios, suscripciones, planes
 supabase/functions/      crear la suscripción en Mercado Pago y recibir el aviso
 test/                    interfaz de prueba del flujo completo, aparte del panel
