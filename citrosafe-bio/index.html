@@ -13,13 +13,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:title" content="CitroSafe Bio · El poder protector del limón argentino">
 <meta property="og:description" content="Bioinsecticida 100% biodegradable formulado con el aceite esencial de limón del NOA. Cuida tu casa sin químicos tóxicos.">
-<!-- IMAGEN OG — PROMPT DE IA:
-     "Editorial product photograph of an amber recycled PET trigger spray bottle with a
-     minimal cream and lime-green label, standing on a pale linen surface, fresh lemons and
-     glossy lemon leaves scattered around, soft natural side light, shallow depth of field,
-     warm organic color grading, 1200x630 crop, premium eco-brand advertising style,
-     photorealistic, no text on label" → guardar como assets/img/og-citrosafe.jpg -->
-<meta property="og:image" content="assets/img/og-citrosafe.jpg">
+<meta property="og:image" content="assets/img/citrosafe-hero.png">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23B9D94B'/%3E%3Cpath d='M9 19c4-9 10-11 14-8-1 7-6 11-14 8z' fill='%23123328'/%3E%3C/svg%3E">
 
@@ -121,58 +115,16 @@
 
     <div class="hero__media" data-anim="zoom" style="--retraso:.3s">
       <!-- ========================================================================
-           IMAGEN HERO — MOCKUP DE LA BOTELLA
-           PROMPT DE IA (generar y guardar como assets/img/botella-hero.png):
-           "Photorealistic product mockup of a 500ml amber recycled PET trigger spray
-            bottle with a black-and-lime child-safety lock trigger head, wrapped in a
-            minimal matte cream label with a lime-green lemon-leaf emblem and generous
-            white space, standing on a dark forest-green backdrop with soft dramatic
-            rim lighting, a few fresh lemons and lemon leaves out of focus behind it,
-            faint mist droplets in the air, studio photography, 3:4 vertical framing,
-            premium natural-products branding, ultra sharp, no visible text"
-           Reemplazar el bloque .marco__arte por: <img src="assets/img/botella-hero.png"
-           alt="Botella pistola gatillo de 500 ml de CitroSafe Bio en PET reciclado ámbar">
+           ÚNICA IMAGEN DEL SITIO.
+           Guardar el render del producto como  assets/img/citrosafe-hero.png
+           (o .jpg, cambiando la extensión acá abajo). Si el archivo todavía no
+           está, el hueco muestra el degradé cítrico en vez de un ícono roto.
            ======================================================================== -->
-      <figure class="marco marco--oscuro">
-        <div class="marco__ratio marco__ratio--alto"></div>
-        <div class="marco__arte" aria-hidden="true">
-          <!-- Ilustración provisional: botella pistola gatillo -->
-          <svg viewBox="0 0 220 300" fill="none">
-            <defs>
-              <linearGradient id="vidrio" x1="60" y1="90" x2="170" y2="290" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#F0B155"/>
-                <stop offset=".45" stop-color="#D98B28"/>
-                <stop offset="1" stop-color="#9A5C11"/>
-              </linearGradient>
-              <linearGradient id="brillo" x1="70" y1="110" x2="95" y2="280" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#FFF6E2" stop-opacity=".55"/>
-                <stop offset="1" stop-color="#FFF6E2" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <!-- cabezal con gatillo y traba de seguridad -->
-            <rect x="80" y="32" width="58" height="62" rx="13" fill="#16382B" stroke="#B9D94B" stroke-width="2.4"/>
-            <rect x="134" y="42" width="52" height="17" rx="8.5" fill="#16382B" stroke="#B9D94B" stroke-width="2.4"/>
-            <circle cx="186" cy="50.5" r="6.5" fill="#B9D94B"/>
-            <path d="M138 68h24c5 0 8 4 6 8.6L161 94" stroke="#B9D94B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <rect x="90" y="44" width="24" height="8" rx="4" fill="#B9D94B"/>
-            <!-- cuello -->
-            <rect x="86" y="92" width="48" height="18" rx="5" fill="#16382B" stroke="#B9D94B" stroke-width="2.2"/>
-            <!-- cuerpo -->
-            <path d="M70 112h80c9 0 16 7 16 16v142c0 9-7 16-16 16H70c-9 0-16-7-16-16V128c0-9 7-16 16-16z" fill="url(#vidrio)" stroke="#B9D94B" stroke-width="2.4"/>
-            <path d="M74 118h22v160H74z" fill="url(#brillo)"/>
-            <!-- etiqueta -->
-            <rect x="62" y="152" width="96" height="86" rx="10" fill="#FBF8F0" opacity=".95"/>
-            <circle cx="110" cy="180" r="16" fill="#B9D94B"/>
-            <path d="M102 186c3.6-6.8 8.6-8.4 12-6.6-.8 5.4-4.6 8.6-12 6.6z" fill="#123328"/>
-            <rect x="80" y="206" width="60" height="6" rx="3" fill="#123328" opacity=".82"/>
-            <rect x="90" y="218" width="40" height="5" rx="2.5" fill="#5E7D6C" opacity=".65"/>
-            <!-- gotitas -->
-            <circle cx="202" cy="40" r="3.2" fill="#B9D94B" opacity=".8"/>
-            <circle cx="210" cy="56" r="2.2" fill="#F6C877" opacity=".65"/>
-            <circle cx="200" cy="68" r="1.8" fill="#B9D94B" opacity=".5"/>
-          </svg>
-        </div>
-        <figcaption class="marco__nota">Pistola gatillo 500 ml · PET reciclado</figcaption>
+      <figure class="marco marco--oscuro marco--hero">
+        <img src="assets/img/citrosafe-hero.png"
+             alt="Botella de CitroSafe Bio con pistola gatillo sobre una mesa de madera, en un invernadero con limoneros cargados de fruta"
+             width="1280" height="720" fetchpriority="high" data-img>
+        <figcaption class="marco__nota">Pistola gatillo · CitroSafe Bio</figcaption>
       </figure>
 
       <div class="hero__sello" aria-hidden="true">
@@ -406,35 +358,10 @@
 
     <div class="productos" data-grupo>
       <article class="producto" data-anim>
-        <!-- ====================================================================
-             PROMPT DE IA (assets/img/producto-gatillo.png):
-             "Clean studio product shot of a 500ml amber recycled PET trigger spray bottle,
-              matte cream minimal label with lime-green lemon emblem, black trigger head with
-              a visible child-safety lock tab, floating on a soft off-white gradient
-              background with gentle drop shadow, bright airy natural-light styling,
-              4:3 framing, eco premium home-care packaging photography, photorealistic"
-             ==================================================================== -->
-        <figure class="marco">
-          <div class="marco__ratio"></div>
-          <div class="marco__arte" aria-hidden="true">
-            <svg viewBox="0 0 240 180" fill="none">
-              <rect x="92" y="16" width="50" height="36" rx="10" fill="#16382B"/>
-              <rect x="138" y="23" width="40" height="13" rx="6.5" fill="#16382B"/>
-              <circle cx="180" cy="29.5" r="5" fill="#B9D94B"/>
-              <path d="M142 42h16c4 0 6 3 4.8 6.4L158 60" stroke="#B9D94B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <rect x="100" y="25" width="18" height="6" rx="3" fill="#B9D94B"/>
-              <rect x="100" y="46" width="34" height="10" rx="4" fill="#123328"/>
-              <path d="M84 50h64c8 0 14 6 14 14v88c0 8-6 14-14 14H84c-8 0-14-6-14-14V64c0-8 6-14 14-14z" fill="#E2A24A"/>
-              <path d="M74 58h18v104H74z" fill="#F6C877" opacity=".5"/>
-              <rect x="78" y="86" width="76" height="62" rx="8" fill="#FBF8F0"/>
-              <circle cx="116" cy="108" r="12" fill="#B9D94B"/>
-              <path d="M110 112c2.7-5 6.4-6.2 9-4.9-.6 4-3.4 6.4-9 4.9z" fill="#123328"/>
-              <rect x="94" y="128" width="44" height="5" rx="2.5" fill="#123328" opacity=".8"/>
-              <rect x="102" y="138" width="28" height="4" rx="2" fill="#5E7D6C" opacity=".6"/>
-            </svg>
-          </div>
-          <figcaption class="marco__nota">Formato principal</figcaption>
-        </figure>
+        <div class="producto__cabecera">
+          <span class="producto__formato">500 ml</span>
+          <span class="producto__medida">Pistola gatillo</span>
+        </div>
         <div class="producto__cuerpo">
           <span class="producto__etiqueta">Ready to use</span>
           <h3>Pistola gatillo 500&nbsp;ml</h3>
@@ -453,33 +380,10 @@
       </article>
 
       <article class="producto producto--refill" data-anim>
-        <!-- ====================================================================
-             PROMPT DE IA (assets/img/producto-refill.png):
-             "Minimal studio product shot of a small 100ml amber glass concentrate refill
-              bottle with a dropper-style cap and a compact kraft-paper label with lime-green
-              accents, standing next to a reusable empty spray bottle, warm cream background,
-              soft shadows, zero-waste refill system aesthetic, 4:3 framing, photorealistic
-              premium eco packaging photography"
-             ==================================================================== -->
-        <figure class="marco">
-          <div class="marco__ratio"></div>
-          <div class="marco__arte" aria-hidden="true">
-            <svg viewBox="0 0 240 180" fill="none">
-              <rect x="146" y="52" width="46" height="112" rx="12" fill="#E8EDDC" opacity=".5" stroke="#5E7D6C" stroke-width="2" stroke-dasharray="5 5"/>
-              <path d="M150 40h38v10h-38z" fill="#5E7D6C" opacity=".35"/>
-              <rect x="70" y="22" width="24" height="18" rx="5" fill="#16382B"/>
-              <rect x="66" y="38" width="32" height="10" rx="4" fill="#123328"/>
-              <path d="M58 48h48c7 0 12 5 12 12v92c0 7-5 12-12 12H58c-7 0-12-5-12-12V60c0-7 5-12 12-12z" fill="#D99A3A"/>
-              <path d="M50 56h14v100H50z" fill="#F6C877" opacity=".45"/>
-              <rect x="52" y="82" width="60" height="56" rx="7" fill="#FBF8F0"/>
-              <circle cx="82" cy="102" r="11" fill="#E9A23B"/>
-              <path d="M77 106c2.4-4.6 5.8-5.7 8.2-4.5-.6 3.7-3.1 5.9-8.2 4.5z" fill="#123328"/>
-              <rect x="62" y="120" width="40" height="5" rx="2.5" fill="#123328" opacity=".8"/>
-              <path d="M122 104h20m-6-6 6 6-6 6" stroke="#8FB52F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <figcaption class="marco__nota">Sistema de recarga</figcaption>
-        </figure>
+        <div class="producto__cabecera">
+          <span class="producto__formato">100 ml</span>
+          <span class="producto__medida">Concentrado · rinde 1 L</span>
+        </div>
         <div class="producto__cuerpo">
           <span class="producto__etiqueta">Eco-refill</span>
           <h3>Concentrado 100&nbsp;ml · rinde 1&nbsp;litro</h3>
@@ -498,89 +402,54 @@
     </div>
 
     <div class="detalles">
-      <div data-anim="izq">
+      <div class="encabezado" data-anim>
         <span class="sobretitulo">Diferenciación</span>
         <h3 class="titulo-seccion" style="font-size:var(--t-h3)">Lo que hace distinto al producto en la góndola</h3>
-        <div class="detalle-lista">
-          <div class="detalle">
-            <div class="detalle__icono" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM20 14h1M14 20h3M20 18v3"/></svg>
-            </div>
-            <div>
-              <h4>Trazabilidad digital</h4>
-              <p>
-                Un código QR en la etiqueta abre la ficha de la finca del NOA donde se
-                cosechó el limón de ese lote. El consumidor no tiene que creer en el origen:
-                lo puede ver.
-              </p>
-            </div>
+      </div>
+
+      <div class="detalle-lista" data-grupo>
+        <div class="detalle" data-anim>
+          <div class="detalle__icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM20 14h1M14 20h3M20 18v3"/></svg>
           </div>
-          <div class="detalle">
-            <div class="detalle__icono" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg>
-            </div>
-            <div>
-              <h4>Packaging pensado para una casa con chicos</h4>
-              <p>
-                Gatillo con traba de seguridad infantil y PET reciclado color ámbar, que
-                además de reducir huella protege los biocompuestos de la degradación por
-                luz.
-              </p>
-            </div>
+          <div>
+            <h4>Trazabilidad digital</h4>
+            <p>
+              Un código QR en la etiqueta abre la ficha de la finca del NOA donde se
+              cosechó el limón de ese lote. El consumidor no tiene que creer en el
+              origen: lo puede ver.
+            </p>
           </div>
-          <div class="detalle">
-            <div class="detalle__icono" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4.5 3 7 6 7 10a7 7 0 0 1-14 0c0-4 2.5-7 7-10z"/><path d="M9 14c0 1.8 1.3 3 3 3"/></svg>
-            </div>
-            <div>
-              <h4>Mecanismo físico, no bioquímico</h4>
-              <p>
-                Al actuar disolviendo la cutícula cerosa del insecto, la plaga no puede
-                desarrollar resistencia como ocurre con los principios activos sintéticos
-                de uso repetido.
-              </p>
-            </div>
+        </div>
+
+        <div class="detalle" data-anim>
+          <div class="detalle__icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg>
+          </div>
+          <div>
+            <h4>Packaging para una casa con chicos</h4>
+            <p>
+              Gatillo con traba de seguridad infantil y PET reciclado color ámbar, que
+              además de reducir huella protege los biocompuestos de la degradación por
+              luz.
+            </p>
+          </div>
+        </div>
+
+        <div class="detalle" data-anim>
+          <div class="detalle__icono" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4.5 3 7 6 7 10a7 7 0 0 1-14 0c0-4 2.5-7 7-10z"/><path d="M9 14c0 1.8 1.3 3 3 3"/></svg>
+          </div>
+          <div>
+            <h4>Mecanismo físico, no bioquímico</h4>
+            <p>
+              Al actuar disolviendo la cutícula cerosa del insecto, la plaga no puede
+              desarrollar resistencia como ocurre con los principios activos sintéticos
+              de uso repetido.
+            </p>
           </div>
         </div>
       </div>
-
-      <!-- ======================================================================
-           PROMPT DE IA (assets/img/qr-etiqueta.jpg):
-           "Close-up macro photograph of a hand holding a smartphone in front of an amber
-            spray bottle label, scanning a small QR code printed on a minimal cream label;
-            the phone screen shows a simple map of a lemon farm in northwestern Argentina;
-            warm afternoon light, lemon grove softly blurred in the background, shallow
-            depth of field, editorial lifestyle photography, 16:10 framing, photorealistic"
-           ====================================================================== -->
-      <figure class="marco" data-anim="der">
-        <div class="marco__ratio marco__ratio--ancho"></div>
-        <div class="marco__arte" aria-hidden="true">
-          <svg viewBox="0 0 300 190" fill="none">
-            <rect x="96" y="24" width="92" height="146" rx="14" fill="#16382B"/>
-            <rect x="103" y="34" width="78" height="126" rx="8" fill="#FBF8F0"/>
-            <circle cx="142" cy="29" r="2" fill="#B9D94B"/>
-            <rect x="112" y="44" width="60" height="44" rx="6" fill="#E8EDDC"/>
-            <path d="M112 76c10-10 18-4 26-12s16-2 22-8" stroke="#8FB52F" stroke-width="2.6" stroke-linecap="round"/>
-            <circle cx="150" cy="64" r="5" fill="#E9A23B"/>
-            <rect x="112" y="96" width="48" height="5" rx="2.5" fill="#123328" opacity=".75"/>
-            <rect x="112" y="108" width="60" height="4" rx="2" fill="#5E7D6C" opacity=".55"/>
-            <rect x="112" y="118" width="36" height="4" rx="2" fill="#5E7D6C" opacity=".4"/>
-            <g fill="#123328">
-              <rect x="112" y="132" width="16" height="16" rx="2"/>
-              <rect x="134" y="132" width="5" height="5"/><rect x="143" y="132" width="5" height="5"/>
-              <rect x="134" y="142" width="10" height="5"/>
-              <rect x="156" y="132" width="16" height="16" rx="2"/>
-            </g>
-            <rect x="116" y="136" width="8" height="8" fill="#FBF8F0"/>
-            <rect x="160" y="136" width="8" height="8" fill="#FBF8F0"/>
-            <path d="M40 150c0-38 14-62 34-72" stroke="#8FB52F" stroke-width="3" stroke-linecap="round" opacity=".6"/>
-            <circle cx="58" cy="96" r="13" fill="#E9A23B" opacity=".85"/>
-            <circle cx="238" cy="118" r="17" fill="#B9D94B" opacity=".7"/>
-            <path d="M232 122c4.5-8.6 10.8-10.6 15-8-1 6.8-5.8 11-15 8z" fill="#123328" opacity=".7"/>
-          </svg>
-        </div>
-        <figcaption class="marco__nota">QR en etiqueta · finca de origen en el NOA</figcaption>
-      </figure>
     </div>
   </div>
 </section>
@@ -662,8 +531,8 @@
      6 · MERCADO
      ========================================================================== -->
 <section class="seccion">
-  <div class="envoltorio mercado">
-    <div data-anim="izq">
+  <div class="envoltorio">
+    <div class="encabezado" data-anim>
       <span class="sobretitulo">Mercado</span>
       <h2 class="titulo-seccion">A quién le hablamos, y por dónde llegamos</h2>
       <p class="bajada">
@@ -671,56 +540,22 @@
         alguien a quien cuidar. Desde ahí, el producto escala hacia el circuito
         especializado que ya convive con ese público.
       </p>
-
-      <ul class="publico" data-grupo>
-        <li data-anim>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
-          <span><b>Familias urbanas y periurbanas</b>Hogares de Argentina con jardín, huerta, balcón con macetas o mascotas, que ya buscan alternativas naturales para el cuidado de sus plantas.</span>
-        </li>
-        <li data-anim>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"/></svg>
-          <span><b>E-commerce propio y marketplaces</b>Canal directo, con mejor control de la narrativa de marca, del contenido educativo y de la relación con quien compra.</span>
-        </li>
-        <li data-anim>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9 5 4h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg>
-          <span><b>Red de viveros y pet shops</b>Puntos físicos donde el público ya está pensando en plantas y en animales: el contexto ideal para explicar por qué este producto es distinto.</span>
-        </li>
-      </ul>
     </div>
 
-    <!-- ========================================================================
-         PROMPT DE IA (assets/img/escena-hogar.jpg):
-         "Warm lifestyle photograph of a bright Argentine home balcony garden: a woman
-          misting a leafy potted plant with an amber trigger spray bottle while a small dog
-          rests nearby and a child's toy sits on the tiled floor; terracotta pots, soft
-          late-afternoon sunlight, natural greens and warm creams, candid editorial style,
-          3:4 vertical framing, photorealistic, shallow depth of field"
-         ======================================================================== -->
-    <figure class="marco" data-anim="der">
-      <div class="marco__ratio marco__ratio--alto"></div>
-      <div class="marco__arte" aria-hidden="true">
-        <svg viewBox="0 0 220 290" fill="none">
-          <circle cx="164" cy="56" r="34" fill="#F6C877" opacity=".65"/>
-          <path d="M22 250h176" stroke="#5E7D6C" stroke-width="2.4" stroke-linecap="round" opacity=".45"/>
-          <path d="M64 250v-34c0-12 8-20 20-20s20 8 20 20v34z" fill="#D98B28" opacity=".85"/>
-          <path d="M84 196c0-26 8-44 22-56-4 26-10 42-22 56z" fill="#8FB52F"/>
-          <path d="M84 196c-6-22-16-34-30-38 6 20 14 32 30 38z" fill="#B9D94B"/>
-          <path d="M84 196c8-16 20-24 34-24-8 14-20 22-34 24z" fill="#6FA82B"/>
-          <circle cx="118" cy="164" r="7" fill="#E9A23B"/>
-          <circle cx="60" cy="176" r="5" fill="#E9A23B" opacity=".8"/>
-          <rect x="128" y="210" width="30" height="40" rx="9" fill="#16382B"/>
-          <circle cx="136" cy="206" r="5" fill="#16382B"/>
-          <circle cx="150" cy="206" r="5" fill="#16382B"/>
-          <circle cx="139" cy="224" r="2.2" fill="#B9D94B"/>
-          <circle cx="148" cy="224" r="2.2" fill="#B9D94B"/>
-          <path d="M158 232c8 2 12 8 12 18" stroke="#16382B" stroke-width="4" stroke-linecap="round"/>
-          <rect x="26" y="196" width="22" height="54" rx="7" fill="#E2A24A"/>
-          <rect x="30" y="186" width="14" height="12" rx="4" fill="#123328"/>
-          <rect x="30" y="212" width="14" height="18" rx="4" fill="#FBF8F0"/>
-        </svg>
-      </div>
-      <figcaption class="marco__nota">Uso cotidiano · balcón, huerta y casa con mascotas</figcaption>
-    </figure>
+    <ul class="publico" data-grupo>
+      <li data-anim>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+        <span><b>Familias urbanas y periurbanas</b>Hogares de Argentina con jardín, huerta, balcón con macetas o mascotas, que ya buscan alternativas naturales para el cuidado de sus plantas.</span>
+      </li>
+      <li data-anim>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+        <span><b>E-commerce propio y marketplaces</b>Canal directo, con mejor control de la narrativa de marca, del contenido educativo y de la relación con quien compra.</span>
+      </li>
+      <li data-anim>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9 5 4h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg>
+        <span><b>Red de viveros y pet shops</b>Puntos físicos donde el público ya está pensando en plantas y en animales: el contexto ideal para explicar por qué este producto es distinto.</span>
+      </li>
+    </ul>
   </div>
 </section>
 

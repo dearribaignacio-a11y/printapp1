@@ -216,7 +216,17 @@
   alHacerScroll();
 
   /* ------------------------------------------------------------------
-     9. Año actual en el pie
+     9. Fotos que todavía no están en el repositorio
+     Si el archivo falta, escondemos el <img> y queda a la vista el degradé
+     cítrico del contenedor, en vez del ícono de imagen rota del navegador.
+     ------------------------------------------------------------------ */
+  document.querySelectorAll("img[data-img]").forEach(function (img) {
+    img.addEventListener("error", function () { img.hidden = true; });
+    if (img.complete && img.naturalWidth === 0) img.hidden = true;
+  });
+
+  /* ------------------------------------------------------------------
+     10. Año actual en el pie
      ------------------------------------------------------------------ */
   document.querySelectorAll("[data-anio]").forEach(function (nodo) {
     nodo.textContent = String(new Date().getFullYear());

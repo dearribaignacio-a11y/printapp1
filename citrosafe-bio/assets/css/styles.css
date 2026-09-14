@@ -92,6 +92,8 @@ body {
 }
 
 img, svg, picture { display: block; max-width: 100%; }
+/* Va después del display:block de arriba, que si no le gana al atributo. */
+[hidden] { display: none !important; }
 button, input, textarea { font: inherit; color: inherit; }
 a { color: inherit; text-decoration: none; }
 
@@ -325,12 +327,15 @@ ul { margin: 0; padding: 0; list-style: none; }
 .acciones--centradas { justify-content: center; }
 
 /* --------------------------------------------------------------------------
-   6. PLACEHOLDERS DE IMAGEN
-   Cada bloque .marco lleva arriba un comentario HTML con el prompt de IA
-   exacto que hay que usar para generar esa imagen.
+   6. IMÁGENES
+   El sitio usa dos fotos y nada más: el producto en el hero de la landing y
+   el equipo en la página de fundadores. El degradé cítrico del fondo queda
+   detrás de la foto, así que mientras el archivo no esté el hueco se ve como
+   un bloque de color de la marca y no como un ícono roto.
    -------------------------------------------------------------------------- */
 .marco {
   position: relative;
+  aspect-ratio: 16 / 9;
   border-radius: var(--radio-l);
   overflow: hidden;
   background:
@@ -338,17 +343,8 @@ ul { margin: 0; padding: 0; list-style: none; }
     radial-gradient(110% 100% at 100% 100%, rgba(246, 200, 119, 0.5), transparent 62%),
     linear-gradient(160deg, #EFF3E2 0%, #E6EDD6 48%, #F7ECD7 100%);
   box-shadow: var(--sombra-media);
+  margin: 0;
   isolation: isolate;
-}
-.marco::after {
-  /* grano sutil para que el placeholder no se vea plano */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
-  mix-blend-mode: soft-light;
-  opacity: 0.5;
-  pointer-events: none;
 }
 .marco--oscuro {
   background:
@@ -357,38 +353,60 @@ ul { margin: 0; padding: 0; list-style: none; }
     linear-gradient(160deg, #16382B 0%, #0F2A20 100%);
   color: var(--crema);
 }
-.marco__ratio { aspect-ratio: 4 / 3; width: 100%; }
-.marco__ratio--alto { aspect-ratio: 3 / 4; }
-.marco__ratio--ancho { aspect-ratio: 16 / 10; }
-.marco__ratio--cuadrado { aspect-ratio: 1 / 1; }
+
+.marco > img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* En el hero la foto acompaña una columna de texto alta, así que en escritorio
+   se recorta a vertical: el envase queda centrado igual. */
+@media (min-width: 900px) {
+  /* El tope de alto evita que la foto se coma el primer scroll en pantallas
+     de portátil, donde la columna de texto ya es alta de por sí. */
+  .marco--hero { aspect-ratio: 4 / 5; width: 100%; max-height: 64svh; }
+}
 
 .marco__nota {
   position: absolute;
   inset: auto 0 0 0;
   z-index: 2;
-  padding: 1rem 1.15rem;
+  padding: 2.4rem 1.15rem 1rem;
   font-size: var(--t-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--tinta-suave);
-  background: linear-gradient(to top, rgba(251, 248, 240, 0.92), rgba(251, 248, 240, 0));
-}
-.marco--oscuro .marco__nota {
-  color: var(--salvia-clara);
-  background: linear-gradient(to top, rgba(15, 42, 32, 0.92), rgba(15, 42, 32, 0));
+  color: var(--crema);
+  background: linear-gradient(to top, rgba(10, 28, 21, 0.82), rgba(10, 28, 21, 0));
 }
 
-/* Ilustración vectorial de relleno mientras no hay foto real */
-.marco__arte {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  padding: 8%;
+/* Foto del equipo en la página de fundadores: sin recorte y con epígrafe
+   debajo, que es como se lee una foto documental. */
+.foto-equipo {
+  margin: clamp(2.5rem, 5vw, 4rem) auto;
+  max-width: 54rem;
 }
-.marco__arte svg { width: 100%; height: 100%; overflow: visible; }
+.foto-equipo img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radio-l);
+  box-shadow: var(--sombra-media);
+  background: linear-gradient(160deg, #EFF3E2, #F7ECD7);
+}
+.foto-equipo figcaption {
+  margin-top: 1.1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--limon);
+  font-size: var(--t-chico);
+  line-height: 1.6;
+  color: var(--tinta-suave);
+  max-width: 46ch;
+}
 
 /* --------------------------------------------------------------------------
    7. HERO
@@ -534,6 +552,18 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .hero__sello svg { width: 100%; height: 100%; }
 @keyframes girar { to { transform: rotate(360deg); } }
+
+/* Portátiles de pantalla baja (1280x720 y similares): compactamos el hero
+   para que los dos botones entren en el primer golpe de vista. */
+@media (min-width: 900px) and (max-height: 820px) {
+  .hero { padding-block: 6.5rem 2.5rem; }
+  .hero__titulo { font-size: clamp(2.5rem, 3.6vw, 3.6rem); }
+  .hero__eslogan { margin-top: 1.1rem; }
+  .hero__texto { margin-top: 1rem; }
+  .hero .acciones { margin-top: 1.6rem; }
+  .hero__datos { margin-top: 1.8rem; padding-top: 1.3rem; }
+  .marco--hero { max-height: 58svh; }
+}
 
 .hero__scroll {
   position: absolute;
@@ -777,7 +807,34 @@ ul { margin: 0; padding: 0; list-style: none; }
   transition: transform 0.5s var(--suave), box-shadow 0.5s var(--suave);
 }
 .producto:hover { transform: translateY(-6px); box-shadow: var(--sombra-media); }
-.producto .marco { border-radius: 0; box-shadow: none; }
+.producto__cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.4rem, 3vw, 2rem) clamp(1.5rem, 3vw, 2.2rem);
+  background: linear-gradient(125deg, rgba(185, 217, 75, 0.24), rgba(214, 235, 142, 0.12));
+  border-bottom: 1px solid var(--linea);
+}
+.producto--refill .producto__cabecera {
+  background: linear-gradient(125deg, rgba(233, 162, 59, 0.22), rgba(246, 200, 119, 0.12));
+}
+.producto__formato {
+  font-family: var(--display);
+  font-size: clamp(2rem, 1.3rem + 2.2vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--bosque);
+}
+.producto__medida {
+  font-size: var(--t-mono);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  text-align: right;
+}
 .producto__cuerpo { padding: clamp(1.5rem, 3vw, 2.2rem); display: grid; gap: 0.75rem; }
 .producto__etiqueta {
   font-size: var(--t-mono);
@@ -803,23 +860,21 @@ ul { margin: 0; padding: 0; list-style: none; }
 .tag--limon { background: rgba(185, 217, 75, 0.18); border-color: rgba(143,181,47,0.35); color: #4C6614; }
 .tag--ambar { background: rgba(233, 162, 59, 0.16); border-color: rgba(200,121,32,0.3); color: #7A4A0C; }
 
-.detalles {
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-  display: grid;
-  gap: clamp(1.8rem, 4vw, 3rem);
-  align-items: center;
-}
-@media (min-width: 880px) { .detalles { grid-template-columns: 0.95fr 1.05fr; } }
+.detalles { margin-top: clamp(3rem, 6vw, 5rem); }
+.detalles .encabezado { margin-bottom: clamp(1.8rem, 4vw, 2.6rem); }
 
-.detalle-lista { display: grid; gap: 1.5rem; margin-top: 1.8rem; }
+.detalle-lista { display: grid; gap: clamp(1.6rem, 3vw, 2.4rem); }
+@media (min-width: 820px) { .detalle-lista { grid-template-columns: repeat(3, 1fr); } }
 .detalle {
-  display: grid;
-  grid-template-columns: 2.9rem 1fr;
-  gap: 1.1rem;
-  align-items: start;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border-radius: var(--radio-m);
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  box-shadow: var(--sombra-baja);
 }
 .detalle__icono {
   width: 2.9rem; height: 2.9rem;
+  margin-bottom: 1.1rem;
   display: grid; place-items: center;
   border-radius: 14px;
   background: linear-gradient(150deg, rgba(185,217,75,0.28), rgba(233,162,59,0.22));
@@ -891,20 +946,26 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* --------------------------------------------------------------------------
    12. MERCADO
    -------------------------------------------------------------------------- */
-.mercado { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
-@media (min-width: 880px) { .mercado { grid-template-columns: 1fr 1fr; } }
-
-.publico { display: grid; gap: 1rem; margin-top: 1.8rem; }
+.publico { display: grid; gap: clamp(1.1rem, 2.4vw, 1.6rem); }
+@media (min-width: 780px) { .publico { grid-template-columns: repeat(3, 1fr); } }
 .publico li {
-  display: flex; gap: 0.9rem; align-items: flex-start;
-  padding: 1.05rem 1.2rem;
+  padding: clamp(1.4rem, 3vw, 1.9rem);
   border-radius: var(--radio-m);
   background: var(--blanco);
   border: 1px solid var(--linea);
+  box-shadow: var(--sombra-baja);
   font-size: var(--t-chico);
+  line-height: 1.6;
   color: var(--tinta-suave);
 }
-.publico svg { width: 1.3rem; height: 1.3rem; flex: none; color: var(--limon-profundo); margin-top: 0.1rem; }
+.publico svg {
+  width: 2.9rem; height: 2.9rem;
+  padding: 0.78rem;
+  border-radius: 14px;
+  background: linear-gradient(150deg, rgba(185,217,75,0.28), rgba(233,162,59,0.2));
+  color: var(--bosque-suave);
+  margin-bottom: 1.1rem;
+}
 .publico b { color: var(--tinta); display: block; font-size: var(--t-base); margin-bottom: 0.15rem; }
 
 /* --------------------------------------------------------------------------
@@ -1116,16 +1177,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   line-height: 1.35;
   letter-spacing: -0.018em;
   color: var(--bosque);
-}
-
-.galeria-historia {
-  display: grid;
-  gap: clamp(1rem, 2.4vw, 1.6rem);
-  margin-block: clamp(2.5rem, 5vw, 4rem);
-}
-@media (min-width: 720px) {
-  .galeria-historia { grid-template-columns: 1.2fr 0.8fr; }
-  .galeria-historia > :first-child { grid-row: span 2; }
 }
 
 .motivos { display: grid; gap: clamp(1.1rem, 2.4vw, 1.6rem); margin-top: 2.5rem; }

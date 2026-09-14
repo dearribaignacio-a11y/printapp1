@@ -49,9 +49,15 @@ Se abre con doble clic en `index.html` y funciona igual que en producción.
 
 2. **Mail de contacto.** `hola@citrosafebio.com.ar` aparece en ambos pies.
 
-3. **Imágenes.** Ver `assets/img/LEEME.md`: cada hueco tiene el prompt de IA
-   listo para generar la imagen. Mientras tanto, los placeholders vectoriales
-   hacen que el sitio se vea terminado.
+3. **Las dos imágenes.** El sitio usa dos fotos y nada más. Hay que guardarlas
+   en `assets/img/` con estos nombres exactos:
+
+   - `citrosafe-hero.png` — el render del producto, va en el hero de la landing.
+   - `fundadores-equipo.jpg` — la foto del equipo, va en la página de fundadores.
+
+   No hay que tocar el HTML: las rutas ya están escritas. Si el archivo falta,
+   el hueco muestra un bloque con el degradé de la marca en vez de romperse.
+   Más detalle en `assets/img/LEEME.md`.
 
 4. **Dominio en los `canonical` y `og:url`** de ambas páginas.
 
@@ -66,6 +72,10 @@ Se abre con doble clic en `index.html` y funciona igual que en producción.
 - **La página de fundadores** tiene una paleta más cálida (ámbar sobre crema) y
   una columna de texto más angosta, para que se lea como un relato y no como un
   pitch.
+- **Sólo dos imágenes en todo el sitio.** Las secciones que no las tienen se
+  resuelven con tipografía, color e íconos: las presentaciones del producto
+  abren con una cabecera tipográfica en vez de una foto, y diferenciación,
+  mercado e impacto usan grillas de tres tarjetas.
 
 ## Detalles técnicos
 
