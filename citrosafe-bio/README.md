@@ -37,13 +37,15 @@ Se abre con doble clic en `index.html` y funciona igual que en producción.
 
 ## Antes de publicar
 
-1. **Número de WhatsApp.** Todos los CTA apuntan al placeholder
-   `5492645551234`. Reemplazarlo por el número real (formato internacional, sin
-   `+` ni espacios) en las dos páginas:
+1. ~~**Número de WhatsApp.**~~ Ya configurado: los seis enlaces de contacto
+   apuntan a `+54 9 264 526-9184` (San Juan). Si alguna vez cambia:
 
    ```bash
-   sed -i 's/5492645551234/TU_NUMERO/g' index.html fundadores.html
+   sed -i 's/5492645269184/NUEVO_NUMERO/g' index.html fundadores.html
    ```
+
+   El formato es internacional, sin `+` ni espacios: `54` + `9` (móvil) +
+   código de área sin el `0` + número sin el `15`.
 
 2. **Mail de contacto.** `hola@citrosafebio.com.ar` aparece en ambos pies.
 
