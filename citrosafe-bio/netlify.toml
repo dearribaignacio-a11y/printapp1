@@ -1,0 +1,27 @@
+# Configuración de Netlify para el sitio de CitroSafe Bio.
+# El sitio es HTML/CSS/JS plano: no hay build step ni dependencias.
+# Para publicarlo: arrastrar esta carpeta a Netlify, o conectar el repo
+# y apuntar "Base directory" a citrosafe-bio/.
+
+[build]
+  base    = "citrosafe-bio"
+  publish = "."
+  command = ""
+
+# /fundadores en vez de /fundadores.html (Netlify ya lo resuelve, pero lo dejamos explícito)
+[[redirects]]
+  from = "/fundadores"
+  to   = "/fundadores.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
